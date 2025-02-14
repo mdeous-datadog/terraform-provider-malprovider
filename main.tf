@@ -2,7 +2,7 @@ terraform {
   required_providers {
     malprovider = {
       source  = "mdeous-datadog/malprovider"
-      version = "1.0.0"
+      version = "~> 1.0.0"
     }
   }
 }
