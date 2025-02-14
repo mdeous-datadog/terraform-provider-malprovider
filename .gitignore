@@ -1,2 +1,6 @@
 dist/
 tf_bad_provider
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+terraform.tfstate
